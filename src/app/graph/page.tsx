@@ -29,10 +29,13 @@ import {
   Bot,
   Flame,
   FileCode,
-  HardDrive
+  HardDrive,
+  Copy,
+  Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { FULL_PROJECT_MERMAID_CODE } from "@/lib/mermaid-code";
 
 interface GraphNode {
   id: string;
@@ -78,6 +81,13 @@ export default function ArchitectureGraphPage() {
   const [selectedLayer, setSelectedLayer] = useState<string>("all");
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>("cognitive-hardware-ai");
   const [activeScenarioId, setActiveScenarioId] = useState<string | null>(null);
+  const [copiedMermaid, setCopiedMermaid] = useState(false);
+
+  const handleCopyMermaid = () => {
+    navigator.clipboard.writeText(FULL_PROJECT_MERMAID_CODE);
+    setCopiedMermaid(true);
+    setTimeout(() => setCopiedMermaid(false), 2500);
+  };
   const [scenarioStep, setScenarioStep] = useState<number>(-1);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [viewMode, setViewMode] = useState<"canvas" | "matrix" | "langgraph">("canvas");
@@ -588,6 +598,15 @@ export default function ArchitectureGraphPage() {
               LangGraph State
             </button>
           </div>
+
+          <Button
+            size="sm"
+            onClick={handleCopyMermaid}
+            className="bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold text-xs gap-1.5 h-9 shadow-md shadow-cyan-900/30 cursor-pointer"
+          >
+            {copiedMermaid ? <Check className="w-3.5 h-3.5 text-slate-950" /> : <Copy className="w-3.5 h-3.5 text-slate-950" />}
+            <span>{copiedMermaid ? "Copied Mermaid Code!" : "Copy Mermaid Code"}</span>
+          </Button>
 
           <Link href="/assistant">
             <Button size="sm" variant="outline" className="border-slate-700 text-xs gap-1.5 h-9">

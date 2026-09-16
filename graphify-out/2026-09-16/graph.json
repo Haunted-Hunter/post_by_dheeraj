@@ -3568,7 +3568,7 @@
       "label": "FULL_PROJECT_MERMAID.md",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
+      "community_name": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "full_project_mermaid.md",
@@ -3576,52 +3576,52 @@
       "source_location": "L1"
     },
     {
-      "id": "full_project_mermaid_interactive_exploration_in_web_application",
-      "label": "\ud83d\ude80 Interactive Exploration in Web Application",
+      "id": "full_project_mermaid_how_to_view_this_diagram",
+      "label": "\ud83d\ude80 How to View This Diagram",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
+      "community_name": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\ud83d\ude80 interactive exploration in web application",
+      "norm_label": "\ud83d\ude80 how to view this diagram",
       "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L277"
+      "source_location": "L274"
     },
     {
-      "id": "full_project_mermaid_master_unified_2d_mermaid_diagram",
-      "label": "\ud83c\udfa8 Master Unified 2D Mermaid Diagram",
+      "id": "full_project_mermaid_reusechain_master_unified_2d_mermaid_architecture_diagram",
+      "label": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
+      "community_name": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\ud83c\udfa8 master unified 2d mermaid diagram",
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L12"
-    },
-    {
-      "id": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "label": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\uddfa\ufe0f reusechain: master unified 2d architecture blueprint",
+      "norm_label": "reusechain: master unified 2d mermaid architecture diagram",
       "source_file": "FULL_PROJECT_MERMAID.md",
       "source_location": "L1"
     },
     {
-      "id": "full_project_mermaid_subsystem_key_architecture_cross_reference",
-      "label": "\ud83d\udd0d Subsystem Key & Architecture Cross-Reference",
+      "id": "full_project_mermaid_subsystem_key_cross_reference_table",
+      "label": "\ud83d\udd0d Subsystem Key & Cross-Reference Table",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
+      "community_name": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\ud83d\udd0d subsystem key & architecture cross-reference",
+      "norm_label": "\ud83d\udd0d subsystem key & cross-reference table",
       "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L253"
+      "source_location": "L251"
+    },
+    {
+      "id": "full_project_mermaid_unified_end_to_end_system_2d_mermaid_diagram",
+      "label": "\ud83d\uddfa\ufe0f Unified End-to-End System 2D Mermaid Diagram",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "ReUseChain: Master Unified 2D Mermaid Architecture Diagram",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\ud83d\uddfa\ufe0f unified end-to-end system 2d mermaid diagram",
+      "source_file": "FULL_PROJECT_MERMAID.md",
+      "source_location": "L12"
     },
     {
       "id": "src_app_api_verify_wipe_route",
@@ -9677,7 +9677,7 @@
     },
     {
       "source": "full_project_mermaid",
-      "target": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
+      "target": "full_project_mermaid_reusechain_master_unified_2d_mermaid_architecture_diagram",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9687,8 +9687,8 @@
       "weight": 1.0
     },
     {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_master_unified_2d_mermaid_diagram",
+      "source": "full_project_mermaid_reusechain_master_unified_2d_mermaid_architecture_diagram",
+      "target": "full_project_mermaid_unified_end_to_end_system_2d_mermaid_diagram",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9698,25 +9698,25 @@
       "weight": 1.0
     },
     {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_subsystem_key_architecture_cross_reference",
+      "source": "full_project_mermaid_reusechain_master_unified_2d_mermaid_architecture_diagram",
+      "target": "full_project_mermaid_subsystem_key_cross_reference_table",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L253",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_interactive_exploration_in_web_application",
+      "source": "full_project_mermaid_reusechain_master_unified_2d_mermaid_architecture_diagram",
+      "target": "full_project_mermaid_how_to_view_this_diagram",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L277",
+      "source_location": "L274",
       "weight": 1.0
     },
     {

@@ -22,7 +22,7 @@ export interface RemediationStepResult {
 export async function GET() {
   return NextResponse.json({
     success: true,
-    service: "PC Doctor Automated Windows Remediation Engine",
+    service: "AI Quick Check Up Automated Windows Remediation Engine",
     supportedActions: [
       "Network & DNS Resolver Cache Flush (ipconfig /flushdns)",
       "Power Scheme & Thermal Envelope Check (powercfg /getactivescheme)",
@@ -216,7 +216,7 @@ export async function POST(req: NextRequest) {
           deviceId,
           eventCategory: "repair",
           eventType: "SYSTEM_AUTO_REPAIR_EXECUTED",
-          actor: "PC Doctor Automated Remediation Engine",
+          actor: "AI Quick Check Up Automated Remediation Engine",
           description: `Executed 4 real Windows maintenance tasks: DNS flush, power plan verification, storage SMART check, and OS component store verification.`,
           eventHash: passportHash,
           prevHash,

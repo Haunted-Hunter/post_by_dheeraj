@@ -108,10 +108,10 @@
     "semantic_hash": "738c50ee685ac795810087d279e6ec57"
   },
   "src/app/api/diagnostics/remediate/route.ts": {
-    "mtime": 1789500166.5444126,
-    "seen": 1789500304.5084348,
-    "ast_hash": "a617b3accd69cd4deb515ac6ed801bfa",
-    "semantic_hash": ""
+    "mtime": 1789235775.5045502,
+    "seen": 1789376530.9093282,
+    "ast_hash": "7d56c4502cc142fbea44f490a19b0359",
+    "semantic_hash": "7d56c4502cc142fbea44f490a19b0359"
   },
   "src/app/api/diagnostics/windows-telemetry/route.ts": {
     "mtime": 1789234800.1420264,
@@ -228,10 +228,10 @@
     "semantic_hash": ""
   },
   "src/app/desktop-agent/page.tsx": {
-    "mtime": 1789500101.8487031,
-    "seen": 1789500304.5084636,
-    "ast_hash": "bee434c8c96eeee3d4df81090c72b425",
-    "semantic_hash": ""
+    "mtime": 1789242084.303443,
+    "seen": 1789376530.909341,
+    "ast_hash": "5adab2e513395a0339c8accc67ee32d8",
+    "semantic_hash": "5adab2e513395a0339c8accc67ee32d8"
   },
   "src/app/devices/[id]/page.tsx": {
     "mtime": 1789215206.1983297,
@@ -245,10 +245,16 @@
     "ast_hash": "4ef0b31618843da1672fa895b2a3551d",
     "semantic_hash": "4ef0b31618843da1672fa895b2a3551d"
   },
+  "src/app/fleet/page.tsx": {
+    "mtime": 1789215142.3440402,
+    "seen": 1789376530.9093435,
+    "ast_hash": "8a9eef07795aae22887383d86da5d6ba",
+    "semantic_hash": "8a9eef07795aae22887383d86da5d6ba"
+  },
   "src/app/graph/page.tsx": {
-    "mtime": 1789497697.1914015,
-    "seen": 1789497755.9796283,
-    "ast_hash": "b8ab493e4ee08f6a831075403c6d484a",
+    "mtime": 1789392058.4722292,
+    "seen": 1789392228.8609328,
+    "ast_hash": "1480c5e61e837c19d9c9e3aaae23ef82",
     "semantic_hash": ""
   },
   "src/app/intake/page.tsx": {
@@ -299,6 +305,12 @@
     "ast_hash": "4fd394b585454983bcb332d3a3ef00bc",
     "semantic_hash": "4fd394b585454983bcb332d3a3ef00bc"
   },
+  "src/app/settings/page.tsx": {
+    "mtime": 1789236481.6619153,
+    "seen": 1789376530.9093506,
+    "ast_hash": "2f13937155ca7da10b5bccce2ff03f89",
+    "semantic_hash": "2f13937155ca7da10b5bccce2ff03f89"
+  },
   "src/app/simulator/page.tsx": {
     "mtime": 1789207275.4166815,
     "seen": 1789376530.9093513,
@@ -318,10 +330,10 @@
     "semantic_hash": "7059343caeaee0431e5c3eb8063657ed"
   },
   "src/components/Navbar.tsx": {
-    "mtime": 1789500439.218495,
-    "seen": 1789500552.4816594,
-    "ast_hash": "27a992cf82d7e2a7e1ada7ec5e0d1cec",
-    "semantic_hash": ""
+    "mtime": 1789376023.9642994,
+    "seen": 1789376530.9093533,
+    "ast_hash": "d85584230010e8931aa22dd909a50176",
+    "semantic_hash": "d85584230010e8931aa22dd909a50176"
   },
   "src/components/ui/badge.tsx": {
     "mtime": 1789244943.415887,
@@ -477,18 +489,6 @@
     "mtime": 1789399440.4792833,
     "seen": 1789400507.8411026,
     "ast_hash": "6b1720bda2e274e593a64f57144cfabc",
-    "semantic_hash": ""
-  },
-  "FULL_PROJECT_MERMAID.md": {
-    "mtime": 1789501100.588818,
-    "seen": 1789501206.4942303,
-    "ast_hash": "00a9aef21d255edf131c064818fcc0a3",
-    "semantic_hash": ""
-  },
-  "src/lib/mermaid-code.ts": {
-    "mtime": 1789501175.1234777,
-    "seen": 1789501206.494215,
-    "ast_hash": "b6902214466eebcf0418dc51545fae61",
     "semantic_hash": ""
   }
 }

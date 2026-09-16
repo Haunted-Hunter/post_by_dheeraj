@@ -40,7 +40,7 @@
       "file_type": "code",
       "norm_label": "graphedge",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L62"
+      "source_location": "L59"
     },
     {
       "id": "src_app_graph_page_graphnode",
@@ -53,7 +53,7 @@
       "file_type": "code",
       "norm_label": "graphnode",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L40"
+      "source_location": "L37"
     },
     {
       "id": "src_app_graph_page_scenariotrace",
@@ -66,7 +66,7 @@
       "file_type": "code",
       "norm_label": "scenariotrace",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L70"
+      "source_location": "L67"
     },
     {
       "id": "src_components_ui_badge_badgeprops",
@@ -503,6 +503,18 @@
       "source_location": "L21"
     },
     {
+      "id": "src_app_fleet_page_fleetdashboard",
+      "label": "FleetDashboard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "fleetdashboard()",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L23"
+    },
+    {
       "id": "src_app_graph_page_architecturegraphpage",
       "label": "ArchitectureGraphPage()",
       "_callable": true,
@@ -512,7 +524,7 @@
       "file_type": "code",
       "norm_label": "architecturegraphpage()",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L80"
+      "source_location": "L77"
     },
     {
       "id": "src_app_intake_page_deviceintakepage",
@@ -597,6 +609,18 @@
       "norm_label": "passportpage()",
       "source_file": "src/app/passport/page.tsx",
       "source_location": "L16"
+    },
+    {
+      "id": "src_app_settings_page_settingspage",
+      "label": "SettingsPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "settingspage()",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L9"
     },
     {
       "id": "src_app_track_id_page_ondclivetrackingpage",
@@ -1112,7 +1136,7 @@
       "file_type": "code",
       "norm_label": "navbar()",
       "source_file": "src/components/Navbar.tsx",
-      "source_location": "L13"
+      "source_location": "L24"
     },
     {
       "id": "src_app_api_devices_route_get",
@@ -1365,6 +1389,30 @@
       "norm_label": "sha256()",
       "source_file": "src/app/api/approvals/route.ts",
       "source_location": "L5"
+    },
+    {
+      "id": "src_app_api_settings_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "settings/route.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "src/app/api/settings/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_api_settings_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "settings/route.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/settings/route.ts",
+      "source_location": "L33"
     },
     {
       "id": "src_app_api_verify_wipe_route_post",
@@ -1727,30 +1775,6 @@
       "source_location": "L5"
     },
     {
-      "id": "src_app_api_settings_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "settings/route.ts",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "src/app/api/settings/route.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_app_api_settings_route_post",
-      "label": "POST()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "settings/route.ts",
-      "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/settings/route.ts",
-      "source_location": "L33"
-    },
-    {
       "id": "src_app_api_dispatch_route_post",
       "label": "POST()",
       "_callable": true,
@@ -1986,6 +2010,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_app_fleet_page",
+      "label": "fleet/page.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "fleet/page.tsx",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_app_graph_page",
       "label": "graph/page.tsx",
       "_origin": "ast",
@@ -2071,6 +2106,17 @@
       "file_type": "code",
       "norm_label": "passport/page.tsx",
       "source_file": "src/app/passport/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_settings_page",
+      "label": "settings/page.tsx",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "settings/page.tsx",
+      "source_file": "src/app/settings/page.tsx",
       "source_location": "L1"
     },
     {
@@ -2215,28 +2261,6 @@
       "norm_label": "cardtitle",
       "source_file": "src/components/ui/card.tsx",
       "source_location": "L31"
-    },
-    {
-      "id": "src_lib_mermaid_code",
-      "label": "mermaid-code.ts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "mermaid-code.ts",
-      "source_file": "src/lib/mermaid-code.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_mermaid_code_full_project_mermaid_code",
-      "label": "FULL_PROJECT_MERMAID_CODE",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "full_project_mermaid_code",
-      "source_file": "src/lib/mermaid-code.ts",
-      "source_location": "L1"
     },
     {
       "id": "src_lib_utils",
@@ -3564,64 +3588,26 @@
       "source_location": "L1"
     },
     {
-      "id": "full_project_mermaid",
-      "label": "FULL_PROJECT_MERMAID.md",
+      "id": "src_app_api_settings_route",
+      "label": "settings/route.ts",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "full_project_mermaid.md",
-      "source_file": "FULL_PROJECT_MERMAID.md",
+      "community_name": "settings/route.ts",
+      "file_type": "code",
+      "norm_label": "settings/route.ts",
+      "source_file": "src/app/api/settings/route.ts",
       "source_location": "L1"
     },
     {
-      "id": "full_project_mermaid_interactive_exploration_in_web_application",
-      "label": "\ud83d\ude80 Interactive Exploration in Web Application",
+      "id": "src_app_api_settings_route_dynamic",
+      "label": "dynamic",
       "_origin": "ast",
       "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\ude80 interactive exploration in web application",
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L277"
-    },
-    {
-      "id": "full_project_mermaid_master_unified_2d_mermaid_diagram",
-      "label": "\ud83c\udfa8 Master Unified 2D Mermaid Diagram",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83c\udfa8 master unified 2d mermaid diagram",
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L12"
-    },
-    {
-      "id": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "label": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\uddfa\ufe0f reusechain: master unified 2d architecture blueprint",
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "full_project_mermaid_subsystem_key_architecture_cross_reference",
-      "label": "\ud83d\udd0d Subsystem Key & Architecture Cross-Reference",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "\ud83d\uddfa\ufe0f ReUseChain: Master Unified 2D Architecture Blueprint",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\ud83d\udd0d subsystem key & architecture cross-reference",
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L253"
+      "community_name": "settings/route.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/settings/route.ts",
+      "source_location": "L4"
     },
     {
       "id": "src_app_api_verify_wipe_route",
@@ -3922,26 +3908,136 @@
       "source_location": "L6"
     },
     {
-      "id": "src_app_api_settings_route",
-      "label": "settings/route.ts",
+      "id": "package_dependencies",
+      "label": "dependencies",
       "_origin": "ast",
       "community": 35,
-      "community_name": "settings/route.ts",
+      "community_name": "dependencies",
       "file_type": "code",
-      "norm_label": "settings/route.ts",
-      "source_file": "src/app/api/settings/route.ts",
-      "source_location": "L1"
+      "norm_label": "dependencies",
+      "source_file": "package.json",
+      "source_location": "L14"
     },
     {
-      "id": "src_app_api_settings_route_dynamic",
-      "label": "dynamic",
+      "id": "package_dependencies_class_variance_authority",
+      "label": "class-variance-authority",
       "_origin": "ast",
       "community": 35,
-      "community_name": "settings/route.ts",
+      "community_name": "dependencies",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/settings/route.ts",
-      "source_location": "L4"
+      "norm_label": "class-variance-authority",
+      "source_file": "package.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "package_dependencies_clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "clsx",
+      "source_file": "package.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "package_dependencies_langchain_core",
+      "label": "@langchain/core",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@langchain/core",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "package_dependencies_langchain_langgraph",
+      "label": "@langchain/langgraph",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@langchain/langgraph",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "package_dependencies_lucide_react",
+      "label": "lucide-react",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "lucide-react",
+      "source_file": "package.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "package_dependencies_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "package_dependencies_prisma_client",
+      "label": "@prisma/client",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "@prisma/client",
+      "source_file": "package.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "package_dependencies_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "package_dependencies_react_dom",
+      "label": "react-dom",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react-dom",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "package_dependencies_recharts",
+      "label": "recharts",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "recharts",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "package_dependencies_tailwind_merge",
+      "label": "tailwind-merge",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "tailwind-merge",
+      "source_file": "package.json",
+      "source_location": "L25"
     },
     {
       "id": "gemini_config_workflows_gsd_help",
@@ -3999,138 +4095,6 @@
       "norm_label": "package.json",
       "source_file": "package.json",
       "source_location": "L1"
-    },
-    {
-      "id": "package_dependencies",
-      "label": "dependencies",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "package.json",
-      "source_location": "L14"
-    },
-    {
-      "id": "package_dependencies_class_variance_authority",
-      "label": "class-variance-authority",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "class-variance-authority",
-      "source_file": "package.json",
-      "source_location": "L18"
-    },
-    {
-      "id": "package_dependencies_clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "clsx",
-      "source_file": "package.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "package_dependencies_langchain_core",
-      "label": "@langchain/core",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "@langchain/core",
-      "source_file": "package.json",
-      "source_location": "L15"
-    },
-    {
-      "id": "package_dependencies_langchain_langgraph",
-      "label": "@langchain/langgraph",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "@langchain/langgraph",
-      "source_file": "package.json",
-      "source_location": "L16"
-    },
-    {
-      "id": "package_dependencies_lucide_react",
-      "label": "lucide-react",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "lucide-react",
-      "source_file": "package.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "package_dependencies_next",
-      "label": "next",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L21"
-    },
-    {
-      "id": "package_dependencies_prisma_client",
-      "label": "@prisma/client",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "@prisma/client",
-      "source_file": "package.json",
-      "source_location": "L17"
-    },
-    {
-      "id": "package_dependencies_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "package_dependencies_react_dom",
-      "label": "react-dom",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "react-dom",
-      "source_file": "package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "package_dependencies_recharts",
-      "label": "recharts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "recharts",
-      "source_file": "package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "package_dependencies_tailwind_merge",
-      "label": "tailwind-merge",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "tailwind-merge",
-      "source_file": "package.json",
-      "source_location": "L25"
     },
     {
       "id": "package_name",
@@ -7621,6 +7585,90 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_button_button",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card_card",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card_cardcontent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card_carddescription",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card_cardheader",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card_cardtitle",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_badge_badge",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_graph_page",
       "target": "src_components_ui_button_button",
       "relation": "imports",
@@ -7629,7 +7677,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L36",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -7641,19 +7689,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_graph_page",
-      "target": "src_lib_mermaid_code_full_project_mermaid_code",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/app/graph/page.tsx",
-      "source_location": "L38",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -7726,6 +7762,90 @@
       "context": "import",
       "source_file": "src/app/passport/[id]/certificate/page.tsx",
       "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_button_button",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card_card",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card_cardcontent",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card_carddescription",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card_cardheader",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card_cardtitle",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_badge_badge",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -8917,6 +9037,66 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_button",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_card",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "src_components_ui_badge",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_fleet_page",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_graph_page",
       "target": "ref_react",
       "relation": "imports_from",
@@ -8937,7 +9117,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L36",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -8949,19 +9129,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_graph_page",
-      "target": "src_lib_mermaid_code",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/app/graph/page.tsx",
-      "source_location": "L38",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -9214,6 +9382,66 @@
       "context": "import",
       "source_file": "src/app/passport/page.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_button",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_card",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_settings_page",
+      "target": "src_components_ui_badge",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -9673,50 +9901,6 @@
       "confidence_score": 1.0,
       "source_file": "ARCHITECTURE_GRAPH.md",
       "source_location": "L73",
-      "weight": 1.0
-    },
-    {
-      "source": "full_project_mermaid",
-      "target": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_master_unified_2d_mermaid_diagram",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_subsystem_key_architecture_cross_reference",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L253",
-      "weight": 1.0
-    },
-    {
-      "source": "full_project_mermaid_reusechain_master_unified_2d_architecture_blueprint",
-      "target": "full_project_mermaid_interactive_exploration_in_web_application",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "FULL_PROJECT_MERMAID.md",
-      "source_location": "L277",
       "weight": 1.0
     },
     {
@@ -11832,6 +12016,17 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_fleet_page",
+      "target": "src_app_fleet_page_fleetdashboard",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/fleet/page.tsx",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_graph_page",
       "target": "src_app_graph_page_graphnode",
       "relation": "contains",
@@ -11839,7 +12034,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L40",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -11850,7 +12045,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L62",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -11861,7 +12056,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L70",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -11872,7 +12067,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/graph/page.tsx",
-      "source_location": "L80",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -11975,6 +12170,17 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_settings_page",
+      "target": "src_app_settings_page_settingspage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/settings/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_simulator_page",
       "target": "src_app_simulator_page_simulatorpage",
       "relation": "contains",
@@ -12015,7 +12221,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/Navbar.tsx",
-      "source_location": "L13",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -12489,17 +12695,6 @@
       "confidence_score": 1.0,
       "source_file": "src/lib/langgraph/workflow.ts",
       "source_location": "L78",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_mermaid_code",
-      "target": "src_lib_mermaid_code_full_project_mermaid_code",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/mermaid-code.ts",
-      "source_location": "L1",
       "weight": 1.0
     },
     {

@@ -82,7 +82,7 @@ export const DIAGNOSTIC_TOOLS: Record<string, DiagnosticToolDefinition> = {
     subsystem: "keyboard_touchpad",
     description: "Executes hardware scancode matrix test across controller bus and inspects specific key signals with human interaction.",
     windowsCommand: 'Get-CimInstance Win32_Keyboard | Select-Object Name, DeviceID, Status',
-    needsInteractiveUserTest: true,
+    needsInteractiveUserTest: false,
   },
   ram_functional: {
     id: "ram_functional",
@@ -269,8 +269,15 @@ Respond with valid JSON only in this schema:
       let displayModelName = targetModel;
 
       // Route provider based on key and model:
-      // If user passed a Groq key (gsk_...) and didn't request DeepSeek-R1 -> use Groq Fast Engine
-      const useGroq = activeKey.startsWith("gsk_") && !targetModel.includes("deepseek") && !targetModel.includes("r1");
+      const groqApiKey = activeKey.startsWith("gsk_") ? activeKey : defaultGroqKey;
+      const geminiApiKey = activeKey.startsWith("AIza") ? activeKey : defaultGeminiKey;
+      const openRouterApiKey = activeKey.startsWith("sk-or-") ? activeKey : defaultOpenRouterKey;
+
+      const isGroqCandidate = (targetModel.includes("analysis") || targetModel.includes("groq") || targetModel.includes("qwen")) && !targetModel.includes("deepseek") && !targetModel.includes("r1");
+      const isGeminiCandidate = targetModel.includes("gemini");
+
+      const useGroq = Boolean(groqApiKey) && (activeKey.startsWith("gsk_") || isGroqCandidate);
+      const useGemini = Boolean(geminiApiKey) && (activeKey.startsWith("AIza") || isGeminiCandidate);
 
       if (useGroq) {
         let groqModel = "qwen/qwen3.8-27b";
@@ -281,12 +288,12 @@ Respond with valid JSON only in this schema:
         const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${activeKey}`,
+            "Authorization": `Bearer ${groqApiKey}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             model: groqModel,
-            max_tokens: 1200,
+            max_tokens: 800,
             temperature: 0.1,
             response_format: { type: "json_object" },
             messages: [
@@ -311,10 +318,8 @@ Respond with valid JSON only in this schema:
           }
           aiModelName = `${displayModelName}`;
         }
-      } else if (activeKey.startsWith("AIza") || targetModel.includes("gemini") || (process.env.GEMINI_API_KEY && targetModel.startsWith("gemini"))) {
+      } else if (useGemini) {
         // 2. Google Gemini Native Models (Gemini 2.0 Flash Thinking, 2.0 Flash, 1.5 Pro, 1.5 Flash)
-        const geminiKey = activeKey.startsWith("AIza") ? activeKey : (process.env.GEMINI_API_KEY || activeKey);
-        
         let geminiModel = "gemini-2.0-flash-thinking-exp-01-21";
         if (targetModel.includes("thinking") || targetModel.includes("deepseek") || targetModel.includes("r1")) {
           geminiModel = "gemini-2.0-flash-thinking-exp-01-21";
@@ -330,7 +335,7 @@ Respond with valid JSON only in this schema:
           displayModelName = "Google Gemini 2.0 Flash (Fast Tool Calling)";
         }
 
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiKey}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`;
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 12000);
         const res = await fetch(geminiUrl, {
@@ -375,7 +380,7 @@ Respond with valid JSON only in this schema:
           }
           aiModelName = `${displayModelName} (Gemini Engine)`;
         }
-      } else {
+      } else if (openRouterApiKey) {
         // 3. OpenRouter (DeepSeek-R1, Llama 3.3 70B, Qwen 2.5 72B / Llama 3.3, Llama 3.1 8B)
         let openRouterModel = "deepseek/deepseek-r1";
         if (targetModel.includes("deepseek") || targetModel.includes("r1")) {

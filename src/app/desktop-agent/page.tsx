@@ -324,7 +324,7 @@ export default function SimpleDesktopAgentPage() {
                   <span className="text-[11px] text-slate-400 font-mono">Host: {telemetry.hostName}</span>
                 </div>
                 <h1 className="text-2xl font-black text-white tracking-tight">
-                  PC Health Doctor
+                  AI quick check up
                 </h1>
                 <p className="text-sm text-slate-300">
                   {telemetry.statusMessage}

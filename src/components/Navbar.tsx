@@ -2,61 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { 
   Laptop, 
-  Truck, 
-  Layers, 
-  Sliders, 
   Cpu, 
-  UserCheck, 
-  ChevronDown,
-  Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  UploadCloud,
   MessageSquare,
-  HelpCircle,
-  BarChart3,
   Network
 } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [toolsOpen, setToolsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const isPathManual = 
+    pathname === "/manual" || 
+    pathname === "/intake" || 
+    pathname === "/desktop-agent" ||
+    pathname === "/simulator" ||
+    pathname === "/approvals" ||
+    pathname === "/passport" ||
+    pathname === "/escalations" ||
+    pathname === "/graph";
+
+  const [manualMode, setManualMode] = useState(isPathManual);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setToolsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const [manualMode, setManualMode] = useState(false);
-
-  useEffect(() => {
-    const isManualPath = 
-      pathname === "/manual" || 
-      pathname === "/intake" || 
-      pathname === "/desktop-agent" ||
-      pathname === "/fleet" ||
-      pathname === "/simulator" ||
-      pathname === "/approvals" ||
-      pathname === "/passport" ||
-      pathname === "/settings" ||
-      pathname === "/escalations" ||
-      pathname === "/graph";
-
-    const stored = typeof window !== "undefined" ? localStorage.getItem("reusechain_manual_mode") : null;
-    if (isManualPath) {
+    if (isPathManual) {
       setManualMode(true);
     } else if (pathname === "/assistant") {
       setManualMode(false);
     } else if (pathname === "/") {
+      const stored = typeof window !== "undefined" ? localStorage.getItem("reusechain_manual_mode") : null;
       setManualMode(stored === "true");
     }
 
@@ -76,22 +50,8 @@ export default function Navbar() {
 
   const primaryNavItems = [
     { label: "Manual Data Entry", href: "/manual", icon: Laptop, highlight: true },
-    { label: "PC Doctor", href: "/desktop-agent", icon: Cpu },
-    { label: "Fleet & Passports", href: "/fleet", icon: Layers },
-    { label: "Settings", href: "/settings", icon: Sliders },
+    { label: "AI quick check up", href: "/desktop-agent", icon: Cpu },
   ];
-
-  const secondaryTools = [
-    { label: "Admin Escalations", href: "/escalations", icon: HelpCircle },
-    { label: "Device Intake", href: "/intake", icon: UploadCloud },
-    { label: "Lifecycle Simulator", href: "/simulator", icon: Sliders },
-    { label: "Approval Queue", href: "/approvals", icon: CheckCircle2 },
-    { label: "Circularity Passport", href: "/passport", icon: ShieldCheck },
-    { label: "Learning & ROI", href: "/learning", icon: BarChart3 },
-    { label: "Architecture Graph", href: "/graph", icon: Network },
-  ];
-
-  const isToolActive = secondaryTools.some((t) => pathname === t.href || pathname.startsWith(t.href));
 
   return (
     <header className="navbar">
@@ -119,45 +79,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-
-          {/* Tools Dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setToolsOpen(!toolsOpen)}
-              className={`nav-link flex items-center gap-1 cursor-pointer ${isToolActive ? "active" : ""}`}
-              aria-expanded={toolsOpen}
-            >
-              <span>More Tools</span>
-              <ChevronDown size={13} className={`transition-transform duration-200 ${toolsOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {toolsOpen && (
-              <div className="absolute left-0 mt-2 w-56 rounded-xl bg-slate-900 border border-white/10 shadow-2xl py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-500">
-                  Enterprise Utilities
-                </div>
-                {secondaryTools.map((tool) => {
-                  const Icon = tool.icon;
-                  const isActive = pathname === tool.href;
-                  return (
-                    <Link
-                      key={tool.href}
-                      href={tool.href}
-                      onClick={() => setToolsOpen(false)}
-                      className={`flex items-center gap-2.5 px-3.5 py-2 text-xs transition-colors ${
-                        isActive 
-                          ? "bg-cyan-500/10 text-cyan-300 font-semibold" 
-                          : "text-slate-300 hover:bg-slate-800 hover:text-white"
-                      }`}
-                    >
-                      <Icon size={14} className={isActive ? "text-cyan-400" : "text-slate-400"} />
-                      <span>{tool.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
 
           {/* Quick toggle to return to Chat Agent */}
           <Link

@@ -1,7 +1,7 @@
 # Graph Report - ReUseChain  (2026-09-16)
 
 ## Corpus Check
-- 81 files · ~87,748 words
+- 81 files · ~87,605 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 5 file(s) not represented in the graph (top: (none) 2, .example 1, .prisma 1)
 
@@ -40,7 +40,7 @@
 - services/route.ts
 - Introduction to GitHub
 - approvals/route.ts
-- 🗺️ ReUseChain: Master Unified 2D Architecture Blueprint
+- ReUseChain: Master Unified 2D Mermaid Architecture Diagram
 - verify-wipe/route.ts
 - keyboard/route.ts
 - devDependencies
@@ -161,9 +161,9 @@ Nodes (3): parseSingleTurnPrompt(), POST(), sha256()
 Cohesion: 0.50
 Nodes (3): Introduction to GitHub, :keyboard: Activity: Your first branch, Step 1: Create a branch
 
-### Community 28 - "🗺️ ReUseChain: Master Unified 2D Architecture Blueprint"
+### Community 28 - "ReUseChain: Master Unified 2D Mermaid Architecture Diagram"
 Cohesion: 0.40
-Nodes (4): 🚀 Interactive Exploration in Web Application, 🎨 Master Unified 2D Mermaid Diagram, 🗺️ ReUseChain: Master Unified 2D Architecture Blueprint, 🔍 Subsystem Key & Architecture Cross-Reference
+Nodes (4): 🚀 How to View This Diagram, ReUseChain: Master Unified 2D Mermaid Architecture Diagram, 🔍 Subsystem Key & Cross-Reference Table, 🗺️ Unified End-to-End System 2D Mermaid Diagram
 
 ### Community 29 - "verify-wipe/route.ts"
 Cohesion: 0.67

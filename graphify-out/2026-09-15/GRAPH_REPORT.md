@@ -1,12 +1,12 @@
-# Graph Report - ReUseChain  (2026-09-16)
+# Graph Report - ReUseChain  (2026-09-15)
 
 ## Corpus Check
-- 81 files · ~87,748 words
+- 81 files · ~87,417 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 5 file(s) not represented in the graph (top: (none) 2, .example 1, .prisma 1)
 
 ## Summary
-- 434 nodes · 718 edges · 39 communities (23 shown, 12 thin omitted)
+- 431 nodes · 737 edges · 39 communities (23 shown, 12 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
@@ -40,29 +40,29 @@
 - services/route.ts
 - Introduction to GitHub
 - approvals/route.ts
-- 🗺️ ReUseChain: Master Unified 2D Architecture Blueprint
+- settings/route.ts
 - verify-wipe/route.ts
 - keyboard/route.ts
 - devDependencies
 - intake/route.ts
 - rules/graphify.md
 - workflows/graphify.md
-- settings/route.ts
+- dependencies
 - gsd-help.md
 - dispatch/route.ts
 - cancel/route.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `prisma` - 33 edges
-2. `react` - 20 edges
-3. `lucide-react` - 17 edges
+2. `react` - 22 edges
+3. `lucide-react` - 19 edges
 4. `recordLearnedResolution()` - 15 edges
 5. `compilerOptions` - 15 edges
-6. `Stage 2 — Production MVP` - 14 edges
-7. `Button` - 12 edges
-8. `cn()` - 12 edges
-9. `Stage 1 — Prototype` - 12 edges
-10. `Badge()` - 11 edges
+6. `Button` - 14 edges
+7. `Stage 2 — Production MVP` - 14 edges
+8. `Badge()` - 13 edges
+9. `cn()` - 12 edges
+10. `Stage 1 — Prototype` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `pollBackupBot()` --calls--> `understandAndDiagnoseWithAi()`  [EXTRACTED]
@@ -83,7 +83,7 @@
 
 ### Community 0 - "react"
 Cohesion: 0.09
-Nodes (23): class-variance-authority, lucide-react, react, ActionProofDetails, ChatMessage, DiagnosticAssistantPage(), GraphEdge, GraphNode (+15 more)
+Nodes (22): class-variance-authority, lucide-react, react, ActionProofDetails, ChatMessage, DiagnosticAssistantPage(), GraphEdge, GraphNode (+14 more)
 
 ### Community 1 - "run-telegram-bots.ts"
 Cohesion: 0.09
@@ -98,8 +98,8 @@ Cohesion: 0.10
 Nodes (34): POST(), SimulatorPage(), AssessmentDossier, evaluateDeviceAfterlife(), sha256(), adminEscalationLoopNode(), compliancePolicyAgent(), createReUseChainWorkflow() (+26 more)
 
 ### Community 4 - "package.json"
-Cohesion: 0.04
-Nodes (44): dependencies, class-variance-authority, clsx, @langchain/core, @langchain/langgraph, lucide-react, next, @prisma/client (+36 more)
+Cohesion: 0.06
+Nodes (32): name, private, scripts, build, dev, prisma:generate, prisma:push, seed (+24 more)
 
 ### Community 5 - "compilerOptions"
 Cohesion: 0.11
@@ -161,10 +161,6 @@ Nodes (3): parseSingleTurnPrompt(), POST(), sha256()
 Cohesion: 0.50
 Nodes (3): Introduction to GitHub, :keyboard: Activity: Your first branch, Step 1: Create a branch
 
-### Community 28 - "🗺️ ReUseChain: Master Unified 2D Architecture Blueprint"
-Cohesion: 0.40
-Nodes (4): 🚀 Interactive Exploration in Web Application, 🎨 Master Unified 2D Mermaid Diagram, 🗺️ ReUseChain: Master Unified 2D Architecture Blueprint, 🔍 Subsystem Key & Architecture Cross-Reference
-
 ### Community 29 - "verify-wipe/route.ts"
 Cohesion: 0.67
 Nodes (3): dynamic, POST(), sha256()
@@ -173,24 +169,28 @@ Nodes (3): dynamic, POST(), sha256()
 Cohesion: 0.18
 Nodes (11): devDependencies, autoprefixer, postcss, prisma, tailwindcss, tailwindcss-animate, tsx, @types/node (+3 more)
 
+### Community 35 - "dependencies"
+Cohesion: 0.17
+Nodes (12): dependencies, class-variance-authority, clsx, @langchain/core, @langchain/langgraph, lucide-react, next, @prisma/client (+4 more)
+
 ## Knowledge Gaps
-- **170 isolated node(s):** `name`, `version`, `private`, `dev`, `build` (+165 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 220 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **167 isolated node(s):** `name`, `version`, `private`, `dev`, `build` (+162 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 218 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `@prisma/client` connect `package.json` to `prisma.ts`?**
-  _High betweenness centrality (0.194) - this node is a cross-community bridge._
+  _High betweenness centrality (0.200) - this node is a cross-community bridge._
 - **Why does `react` connect `react` to `workflow.ts`, `package.json`, `layout.tsx`?**
-  _High betweenness centrality (0.088) - this node is a cross-community bridge._
-- **Why does `prisma` connect `prisma.ts` to `intake/route.ts`, `run-telegram-bots.ts`, `settings/route.ts`, `workflow.ts`, `dispatch/route.ts`, `cancel/route.ts`, `simulate-day/route.ts`, `windows-telemetry/route.ts`, `external/route.ts`, `telegram/route.ts`, `remediate/route.ts`, `media/route.ts`, `services/route.ts`, `approvals/route.ts`, `verify-wipe/route.ts`, `keyboard/route.ts`?**
-  _High betweenness centrality (0.078) - this node is a cross-community bridge._
+  _High betweenness centrality (0.092) - this node is a cross-community bridge._
+- **Why does `prisma` connect `prisma.ts` to `intake/route.ts`, `run-telegram-bots.ts`, `workflow.ts`, `dispatch/route.ts`, `cancel/route.ts`, `simulate-day/route.ts`, `windows-telemetry/route.ts`, `external/route.ts`, `telegram/route.ts`, `remediate/route.ts`, `media/route.ts`, `services/route.ts`, `approvals/route.ts`, `settings/route.ts`, `verify-wipe/route.ts`, `keyboard/route.ts`?**
+  _High betweenness centrality (0.080) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _170 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _167 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `react` be split into smaller, more focused modules?**
-  _Cohesion score 0.08711433756805807 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09435028248587571 - nodes in this community are weakly interconnected._
 - **Should `run-telegram-bots.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.08942139099941554 - nodes in this community are weakly interconnected._
 - **Should `workflow.ts` be split into smaller, more focused modules?**
