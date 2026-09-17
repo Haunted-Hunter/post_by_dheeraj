@@ -5,24 +5,115 @@ import { recordLearnedResolution } from "@/lib/self-learning-agent";
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const ticketId = searchParams.get("ticketId") || searchParams.get("id");
+    let ticketId = searchParams.get("ticketId") || searchParams.get("id");
 
-    if (!ticketId) {
-      return NextResponse.json(
-        { success: false, error: "ticketId parameter is required" },
-        { status: 400 }
-      );
+    let escalation: any = null;
+    if (ticketId) {
+      escalation = await prisma.adminEscalation.findUnique({
+        where: { id: ticketId },
+      });
     }
 
-    const escalation = await prisma.adminEscalation.findUnique({
-      where: { id: ticketId },
-    });
+    if (!escalation) {
+      // Fallback: check most recent pending escalation
+      escalation = await prisma.adminEscalation.findFirst({
+        where: { status: "pending" },
+        orderBy: { createdAt: "desc" },
+      });
+      if (escalation) {
+        ticketId = escalation.id;
+      }
+    }
 
     if (!escalation) {
       return NextResponse.json(
-        { success: false, error: `Escalation #${ticketId} not found` },
+        { success: false, error: `Escalation #${ticketId || "pending"} not found` },
         { status: 404 }
       );
+    }
+
+    // If still pending, check live Telegram getUpdates for admin replies
+    if (escalation.status === "pending") {
+      try {
+        const {
+          TELEGRAM_ADMIN_BOT_TOKEN,
+          parseTelegramAdminCommand,
+          deliverResolutionToUserChat,
+          sendTelegramMessage,
+        } = await import("@/lib/telegram-service");
+
+        const tgRes = await fetch(
+          `https://api.telegram.org/bot${TELEGRAM_ADMIN_BOT_TOKEN}/getUpdates?limit=10`
+        );
+        if (tgRes.ok) {
+          const uJson = await tgRes.json();
+          if (uJson.ok && Array.isArray(uJson.result)) {
+            for (const update of uJson.result) {
+              const msg = update.message;
+              if (!msg) continue;
+              const rawText = (msg.text || msg.caption || "").trim();
+              const replyToText = msg.reply_to_message?.text;
+              const chatId = msg.chat?.id;
+
+              const parsed = parseTelegramAdminCommand(rawText, replyToText);
+              if (parsed.command === "reply" && parsed.resolutionMessage) {
+                const targetMatch =
+                  !parsed.ticketId ||
+                  escalation.id.startsWith(parsed.ticketId) ||
+                  parsed.ticketId.includes(escalation.id.slice(0, 6));
+
+                if (targetMatch) {
+                    const fromUser = msg.from?.first_name
+                      ? `${msg.from.first_name} ${msg.from.last_name || ""}`.trim()
+                      : "Lead Systems Administrator";
+
+                    await recordLearnedResolution({
+                      escalationId: escalation.id,
+                      adminResponse: parsed.resolutionMessage,
+                      resolvedBy: `${fromUser} (via Telegram Bot)`,
+                    });
+
+                    await deliverResolutionToUserChat(escalation.id, parsed.resolutionMessage);
+
+                    // Acknowledge update offset so it's not processed repeatedly
+                    await fetch(
+                      `https://api.telegram.org/bot${TELEGRAM_ADMIN_BOT_TOKEN}/getUpdates?offset=${update.update_id + 1}&limit=1`
+                    );
+
+                    if (chatId) {
+                      await sendTelegramMessage(
+                        TELEGRAM_ADMIN_BOT_TOKEN,
+                        chatId,
+                        `✅ *[Solution Applied to User Chat]*\nTicket: \`#${escalation.id.slice(0, 8)}\`\nStatus: Resolved & Delivered!`
+                      );
+                    }
+
+                    const updatedEsc = await prisma.adminEscalation.findUnique({
+                      where: { id: ticketId || escalation.id },
+                    });
+
+                    if (updatedEsc) {
+                      return NextResponse.json({
+                        success: true,
+                        data: {
+                          id: updatedEsc.id,
+                          status: updatedEsc.status,
+                          adminResponse: updatedEsc.adminResponse,
+                          learnedRule: updatedEsc.learnedRule,
+                          resolvedBy: updatedEsc.resolvedBy,
+                          urgency: updatedEsc.urgency,
+                          updatedAt: updatedEsc.updatedAt,
+                        },
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } catch (tgErr: any) {
+        console.warn("Auto-check Telegram updates in status route:", tgErr.message);
+      }
     }
 
     return NextResponse.json({

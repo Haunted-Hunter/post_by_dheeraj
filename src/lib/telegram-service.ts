@@ -44,7 +44,8 @@ export interface SimulatedTelegramMessage {
 const telegramSimQueue: SimulatedTelegramMessage[] = [];
 
 /**
- * Sends a Markdown-formatted message to any Telegram Chat using the provided token
+ * Sends a Markdown-formatted message to any Telegram Chat using the provided token.
+ * Automatically retries in plain-text mode if Markdown parsing fails.
  */
 export async function sendTelegramMessage(
   token: string,
@@ -69,7 +70,26 @@ export async function sendTelegramMessage(
       return { success: true, messageId: String(data?.result?.message_id) };
     } else {
       const errText = await res.text();
-      console.warn(`Telegram sendMessage failed (${res.status}):`, errText);
+      console.warn(`Telegram sendMessage failed with ${parseMode} (${res.status}):`, errText);
+      // Fallback: If Markdown entity parsing failed, retry immediately as plain text
+      if (parseMode) {
+        try {
+          const retryRes = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text,
+            }),
+          });
+          if (retryRes.ok) {
+            const retryData = await retryRes.json();
+            return { success: true, messageId: String(retryData?.result?.message_id) };
+          }
+        } catch (retryErr) {
+          console.warn("Telegram plain-text retry failed:", retryErr);
+        }
+      }
       return { success: false, error: errText };
     }
   } catch (err: any) {
@@ -107,6 +127,13 @@ export async function downloadTelegramFileAsBase64(
   }
 }
 
+export const DEFAULT_ADMIN_CHAT_ID = "7312450336";
+let runtimeAdminChatId: string | null = null;
+
+export function setRuntimeAdminChatId(chatId: string | number) {
+  runtimeAdminChatId = String(chatId);
+}
+
 /**
  * Dispatch formatted Admin Escalation alert to Admin Telegram Bot (@AHackBattle013bot)
  */
@@ -114,7 +141,26 @@ export async function dispatchEscalationToTelegram(
   payload: TelegramEscalationPayload
 ): Promise<{ success: boolean; mode: "live_telegram" | "simulated_gateway"; messageId?: string }> {
   const botToken = TELEGRAM_ADMIN_BOT_TOKEN;
-  const adminChatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
+  let targetChatId = process.env.TELEGRAM_ADMIN_CHAT_ID || runtimeAdminChatId || DEFAULT_ADMIN_CHAT_ID;
+
+  // If no chat ID cached, attempt auto-discovery from latest updates
+  if (!targetChatId) {
+    try {
+      const updatesRes = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates?limit=5`);
+      if (updatesRes.ok) {
+        const uJson = await updatesRes.json();
+        if (uJson.ok && Array.isArray(uJson.result) && uJson.result.length > 0) {
+          const lastMsg = uJson.result[uJson.result.length - 1]?.message;
+          if (lastMsg?.chat?.id) {
+            targetChatId = String(lastMsg.chat.id);
+            runtimeAdminChatId = targetChatId;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Could not query getUpdates for admin chat ID:", e);
+    }
+  }
 
   const originText = payload.sourceChannel === "telegram_backup_bot" 
     ? "📱 *Origin:* Backup Telegram Bot (Mobile Device - PC Offline / Drive Failure)"
@@ -148,9 +194,8 @@ export async function dispatchEscalationToTelegram(
   let liveSent = false;
   let liveMsgId: string | undefined;
 
-  // If specific ADMIN_CHAT_ID is set, dispatch directly to admin
-  if (adminChatId) {
-    const sendResult = await sendTelegramMessage(botToken, adminChatId, formattedText);
+  if (targetChatId) {
+    const sendResult = await sendTelegramMessage(botToken, targetChatId, formattedText);
     if (sendResult.success) {
       liveSent = true;
       liveMsgId = sendResult.messageId;
@@ -160,7 +205,7 @@ export async function dispatchEscalationToTelegram(
   // Queue in simulation queue for audit & UI inspection
   const simMessage: SimulatedTelegramMessage = {
     id: `tg-alert-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`,
-    chatId: adminChatId || "admin-channel",
+    chatId: targetChatId || "admin-channel",
     text: formattedText,
     mediaUrl: payload.mediaUrl,
     sentAt: new Date().toISOString(),
@@ -225,9 +270,9 @@ export async function deliverResolutionToUserChat(
 }
 
 /**
- * Parses incoming Telegram message from Admin (e.g. "/reply ESC-1234 Fix driver")
+ * Parses incoming Telegram message from Admin (e.g. "/reply ESC-1234 Fix driver" or plain "Book a electrician")
  */
-export function parseTelegramAdminCommand(text: string): TelegramAdminReplyParsed {
+export function parseTelegramAdminCommand(text: string, replyToText?: string): TelegramAdminReplyParsed {
   const trimmed = (text || "").trim();
 
   // Pattern 1: /reply <ticketId> <resolution>
@@ -237,6 +282,16 @@ export function parseTelegramAdminCommand(text: string): TelegramAdminReplyParse
       command: "reply",
       ticketId: replyMatch[1],
       resolutionMessage: replyMatch[2].trim(),
+      rawText: trimmed,
+    };
+  }
+
+  // Pattern 1B: /reply <resolution> (without ticketId, targeted at active pending escalation)
+  const replyOnlyMatch = trimmed.match(/^\/reply\s+([\s\S]+)$/i);
+  if (replyOnlyMatch) {
+    return {
+      command: "reply",
+      resolutionMessage: replyOnlyMatch[1].trim(),
       rawText: trimmed,
     };
   }
@@ -252,12 +307,35 @@ export function parseTelegramAdminCommand(text: string): TelegramAdminReplyParse
     };
   }
 
+  // Pattern 3: Native Telegram reply to an escalation notification
+  if (replyToText) {
+    const extractedId = replyToText.match(/Ticket ID:\s*`?([a-zA-Z0-9_-]+)`?/i) ||
+                        replyToText.match(/Ticket:\s*`?([a-zA-Z0-9_-]+)`?/i);
+    if (extractedId) {
+      return {
+        command: "reply",
+        ticketId: extractedId[1],
+        resolutionMessage: trimmed,
+        rawText: trimmed,
+      };
+    }
+  }
+
   if (trimmed.startsWith("/status")) {
     return { command: "status", rawText: trimmed };
   }
 
   if (trimmed.startsWith("/help") || trimmed.startsWith("/start")) {
     return { command: "help", rawText: trimmed };
+  }
+
+  // Pattern 4: Direct conversational admin response (e.g. "Book a electrician", "Replace thermal paste")
+  if (trimmed.length > 0) {
+    return {
+      command: "reply",
+      resolutionMessage: trimmed,
+      rawText: trimmed,
+    };
   }
 
   return {

@@ -18,6 +18,16 @@ export interface LearnedKnowledgeItem {
   timesApplied: number;
 }
 
+// Non-symptom conversational and escalation words that must never be treated as diagnostic signatures
+const NON_SYMPTOM_WORDS = new Set([
+  "please", "escalate", "admin", "help", "matter", "what", "whats", "problem", "this", "that",
+  "with", "have", "your", "from", "getting", "behavior", "encountered", "during", "issue",
+  "ticket", "report", "system", "tell", "need", "could", "would", "should", "know", "dont",
+  "does", "like", "when", "then", "into", "about", "just", "some", "other", "user", "device",
+  "across", "which", "there", "their", "here", "were", "been", "also", "only", "more", "forward",
+  "error", "check", "code", "bugs"
+]);
+
 // In-memory hot cache for instant lookup
 const learnedCache: Map<string, LearnedKnowledgeItem> = new Map();
 
@@ -109,13 +119,13 @@ export async function recordLearnedResolution(params: {
     });
   }
 
-  // 5. Extract keywords from query & symptom for fast matching
+  // 5. Extract strictly technical keywords from query & symptom for fast matching
   const combinedText = `${escalation.queryText} ${escalation.symptomSummary}`.toLowerCase();
   const tokens = Array.from(new Set(
     combinedText
       .replace(/[^a-z0-9_\-\s]/g, " ")
       .split(/\s+/)
-      .filter((t) => t.length > 3)
+      .filter((t) => t.length > 3 && !NON_SYMPTOM_WORDS.has(t))
   ));
 
   const learnedItem: LearnedKnowledgeItem = {
@@ -156,6 +166,24 @@ export async function findLearnedKnowledgeMatch(
 
   const text = `${queryText} ${photoContext || ""}`.toLowerCase();
 
+  // If user is explicitly requesting admin escalation or stating AI does not know, NEVER intercept with learned knowledge
+  const isEscalationRequest = 
+    text.includes("admin") ||
+    text.includes("escalat") ||
+    text.includes("forward") ||
+    text.includes("not sure") ||
+    text.includes("dont know") ||
+    text.includes("don't know") ||
+    text.includes("cant answer") ||
+    text.includes("can't answer") ||
+    text.includes("cannot answer") ||
+    text.includes("seek help") ||
+    text.includes("seek for help");
+
+  if (isEscalationRequest) {
+    return { matched: false, similarityScore: 0 };
+  }
+
   // Also query database for any resolved escalations that might not be in the hot cache
   try {
     const dbResolved = await prisma.adminEscalation.findMany({
@@ -172,7 +200,10 @@ export async function findLearnedKnowledgeMatch(
       if (!learnedCache.has(cacheKey) && esc.adminResponse) {
         const combined = `${esc.queryText} ${esc.symptomSummary}`.toLowerCase();
         const tokens = Array.from(new Set(
-          combined.replace(/[^a-z0-9_\-\s]/g, " ").split(/\s+/).filter((t) => t.length > 3)
+          combined
+            .replace(/[^a-z0-9_\-\s]/g, " ")
+            .split(/\s+/)
+            .filter((t) => t.length > 3 && !NON_SYMPTOM_WORDS.has(t))
         ));
         learnedCache.set(cacheKey, {
           id: cacheKey,
@@ -198,9 +229,9 @@ export async function findLearnedKnowledgeMatch(
   for (const item of Array.from(learnedCache.values())) {
     let matchesCount = 0;
 
-    // Check specific error codes (e.g. 0x800f, 0x000000d1, etc.)
+    // Check specific error codes (e.g. 0x800f, 0x000000d1, 0x80070005, etc.)
     const hexCodes = text.match(/0x[0-9a-f]+/gi);
-    if (hexCodes) {
+    if (hexCodes && hexCodes.length > 0) {
       for (const hex of hexCodes) {
         if (item.symptomSignature.includes(hex.toLowerCase()) || item.keywords.includes(hex.toLowerCase())) {
           matchesCount += 4;
@@ -208,27 +239,27 @@ export async function findLearnedKnowledgeMatch(
       }
     }
 
-    // Check keyword token overlaps
+    // Check non-stopword keyword token overlaps
     for (const token of item.keywords) {
-      if (text.includes(token)) {
+      if (!NON_SYMPTOM_WORDS.has(token) && text.includes(token)) {
         matchesCount += 1;
       }
     }
 
     // Direct signature substring inclusion
-    if (item.symptomSignature.length > 8 && text.includes(item.symptomSignature.slice(0, 20))) {
+    if (item.symptomSignature.length > 12 && text.includes(item.symptomSignature.slice(0, 24))) {
       matchesCount += 3;
     }
 
     const score = item.keywords.length > 0 ? matchesCount / Math.max(item.keywords.length * 0.5, 3) : 0;
 
-    if (matchesCount >= 2 && score > highestScore) {
+    if (matchesCount >= 3 && score > highestScore) {
       highestScore = score;
       bestMatch = item;
     }
   }
 
-  if (bestMatch && highestScore >= 0.5) {
+  if (bestMatch && highestScore >= 0.7) {
     bestMatch.timesApplied += 1;
     return {
       matched: true,

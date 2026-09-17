@@ -1,7 +1,7 @@
 # Graph Report - ReUseChain  (2026-09-17)
 
 ## Corpus Check
-- 85 files · ~92,310 words
+- 85 files · ~92,077 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 5 file(s) not represented in the graph (top: (none) 2, .example 1, .prisma 1)
 

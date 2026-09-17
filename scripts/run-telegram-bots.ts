@@ -10,6 +10,7 @@ import {
   dispatchEscalationToTelegram,
   deliverResolutionToUserChat,
   parseTelegramAdminCommand,
+  setRuntimeAdminChatId,
 } from "../src/lib/telegram-service";
 import * as crypto from "crypto";
 
@@ -474,6 +475,7 @@ async function pollAdminBot() {
           : "Lead Systems Administrator";
 
         console.log(`👨‍💻 [Admin Bot] Received message from Admin ${chatId}: "${rawText.slice(0, 50)}"`);
+        setRuntimeAdminChatId(chatId);
 
         // Handle /start or /help
         if (rawText === "/start" || rawText === "/help") {

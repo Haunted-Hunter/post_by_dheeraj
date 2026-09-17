@@ -575,6 +575,16 @@ export default function SimpleDesktopAgentPage() {
               <button
                 type="button"
                 onClick={() => {
+                  setIssueText("skip testing, go straight to repair booking");
+                  handleAnalyzeIssue("skip testing, go straight to repair booking");
+                }}
+                className="px-2.5 py-1 rounded bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 text-xs border border-amber-500/30 transition-colors font-semibold"
+              >
+                🛵 Skip Testing → Book Repair
+              </button>
+              <button
+                type="button"
+                onClick={() => {
                   setIssueText("Battery draining from 100% to 0% in 40 minutes");
                   handleAnalyzeIssue("Battery draining from 100% to 0% in 40 minutes");
                 }}
@@ -704,6 +714,36 @@ export default function SimpleDesktopAgentPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Triggered Tool Testing / Bypass Notification (Tools activation.pdf) */}
+                  {agentDecision.interpretedIntent?.includes("Skipped") ? (
+                    <div className="bg-amber-950/40 border border-amber-500/40 rounded-xl p-3.5 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2 text-amber-300 font-semibold">
+                        <Sparkles className="w-4 h-4 text-amber-400" />
+                        <span>Hardware Testing Bypassed per your directive. Proceeding straight to Doorstep Repair Booking.</span>
+                      </div>
+                      <Badge variant="amber" className="text-[10px]">Direct Booking Mode</Badge>
+                    </div>
+                  ) : agentDecision.triggeredTool && (
+                    <div className="bg-slate-950 rounded-xl p-3.5 border border-cyan-500/30 space-y-2 text-xs">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-cyan-400 font-bold text-[11px]">
+                          <Terminal size={14} /> Triggered Host Testing Tool: {agentDecision.triggeredTool.name}
+                        </div>
+                        <Badge variant="default" className="text-[9px] font-mono bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
+                          Executed in {agentDecision.triggeredTool.executionTimeMs || 140}ms via CIM
+                        </Badge>
+                      </div>
+                      <code className="text-[11px] font-mono text-emerald-400 block bg-black/50 p-2 rounded truncate">
+                        {agentDecision.triggeredTool.windowsCommand}
+                      </code>
+                      {agentDecision.triggeredTool.rawExecutionOutput && (
+                        <pre className="text-[10px] font-mono text-slate-400 bg-black/60 p-2 rounded max-h-24 overflow-x-auto whitespace-pre-wrap">
+                          {agentDecision.triggeredTool.rawExecutionOutput}
+                        </pre>
+                      )}
+                    </div>
+                  )}
 
                   {/* Three Factors */}
                   <div>

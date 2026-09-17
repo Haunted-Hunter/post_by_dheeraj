@@ -31,6 +31,10 @@ export async function POST(req: NextRequest) {
     // Check if explicitly healthy baseline
     const isExplicitBaseline = 
       (lowerSymptom === "none" || lowerSymptom.includes("normal baseline") || lowerSymptom.includes("healthy") || lowerSymptom.includes("functioning normally")) &&
+      !lowerSymptom.includes("skip") &&
+      !lowerSymptom.includes("repair") &&
+      !lowerSymptom.includes("repapr") &&
+      !lowerSymptom.includes("book") &&
       !lowerSymptom.includes("semi colon") &&
       !lowerSymptom.includes("semicolon") &&
       !lowerSymptom.includes("key") &&

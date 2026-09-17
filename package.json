@@ -9,7 +9,8 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "seed": "tsx prisma/seed.ts",
-    "telegram:bots": "tsx scripts/run-telegram-bots.ts"
+    "telegram:bots": "tsx scripts/run-telegram-bots.ts",
+    "agent:loop": "tsx scripts/loop-chatbot-agent.ts"
   },
   "dependencies": {
     "@langchain/core": "^1.2.11",

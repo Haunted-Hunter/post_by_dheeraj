@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import * as crypto from "crypto";
+import { understandAndDiagnoseWithAi } from "@/lib/hardware-ai-agent";
+import { sendTelegramMessage, TELEGRAM_BACKUP_BOT_TOKEN } from "@/lib/telegram-service";
 
 function sha256(data: string): string {
   return crypto.createHash("sha256").update(data).digest("hex");
@@ -140,7 +142,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 1. Analyze Screen Photo or Text via Cognitive Vision & Pattern Engine
+    // 1. Run Cognitive Hardware Diagnostic Engine
+    const aiDiag = await understandAndDiagnoseWithAi(queryText);
     const analysis = analyzeScreenPhotoOrQuery(queryText, photoType);
 
     // 2. Resolve Target Device
@@ -152,12 +155,11 @@ export async function POST(req: NextRequest) {
 
     let executionResult: any = null;
 
-    // 3. Smooth Agent Handoff Execution
-    if (analysis.recommendedAgent === "hardware_execution_agent" && deviceId) {
-      // Dispatches Hardware Execution Agent
+    // 3. Smooth Agent Handoff Execution (if booking or script needed)
+    if ((analysis.recommendedAgent === "hardware_execution_agent" || aiDiag.triageVerdict === "repair") && deviceId) {
       const serviceType = analysis.crashCategory === "hardware_storage" 
         ? "Emergency NVMe SSD Replacement & Data Recovery"
-        : "RAM Bank Replacement & Memory Trace Servicing";
+        : "Hardware Component Servicing & Board Repair";
 
       const booking = await prisma.technicianBooking.create({
         data: {
@@ -166,29 +168,14 @@ export async function POST(req: NextRequest) {
           serviceType,
           technicianName: "Alex Rivera (Dell/HP Certified)",
           vendorName: "Campus IT Hardware Depot",
-          estimatedCost: 65.0,
+          estimatedCost: 45.0,
           scheduledDate: new Date(Date.now() + 86400000), // Next-day service
           serviceStatus: "dispatched",
-          workOrderNotes: `Dispatched via Telegram Bot Screen Photo Triage. Defect: ${analysis.detectedErrorCode} in ${analysis.faultyModule}.`,
+          workOrderNotes: `Dispatched via Telegram Bot Triage: ${aiDiag.interpretedIntent}.`,
         },
       });
 
-      // Commit to Circularity Passport
-      const lastEvent = await prisma.passportEvent.findFirst({ orderBy: { timestamp: "desc" } });
-      const prevHash = lastEvent ? lastEvent.eventHash : "GENESIS_BLOCK_000000000000000000000000000000000000";
       const eventHash = sha256(`TELEGRAM_HW_DISPATCH:${booking.id}:${Date.now()}`);
-
-      await prisma.passportEvent.create({
-        data: {
-          deviceId,
-          eventCategory: "custody",
-          eventType: "TELEGRAM_SCREEN_HW_DEFECT_DISPATCHED",
-          actor: "Telegram OS Triage Bot",
-          description: `Screen photo verified hardware fault: ${analysis.detectedErrorCode}. Dispatched ${serviceType} (Booking #${booking.id.slice(0, 8)}).`,
-          eventHash,
-          prevHash,
-        },
-      });
 
       executionResult = {
         actionType: "technician_dispatched",
@@ -198,50 +185,54 @@ export async function POST(req: NextRequest) {
         scheduledDate: booking.scheduledDate,
         passportHash: eventHash,
       };
-    } else if (deviceId) {
-      // Software Recovery Agent Handoff
-      const lastEvent = await prisma.passportEvent.findFirst({ orderBy: { timestamp: "desc" } });
-      const prevHash = lastEvent ? lastEvent.eventHash : "GENESIS_BLOCK_000000000000000000000000000000000000";
-      const eventHash = sha256(`TELEGRAM_SW_HANDOFF:${deviceId}:${analysis.detectedErrorCode}:${Date.now()}`);
-
-      await prisma.passportEvent.create({
-        data: {
-          deviceId,
-          eventCategory: "decision",
-          eventType: "TELEGRAM_SW_RECOVERY_ENGAGED",
-          actor: "Telegram OS Triage Bot",
-          description: `Screen photo triage resolved OS software fault: ${analysis.detectedErrorCode}. Software Recovery script generated.`,
-          eventHash,
-          prevHash,
-        },
-      });
-
-      executionResult = {
-        actionType: "software_script_ready",
-        remediationCommands: analysis.remediationCommands,
-        passportHash: eventHash,
-      };
     }
 
-    // 4. Synthesize Telegram-Formatted Response
+    // 4. Synthesize Rich Telegram Response adhering to Requirements 3 & 4
     const telegramReply = [
-      `🔍 *OS Screen Diagnostics Result:*`,
-      `• *Stop Code:* \`${analysis.detectedErrorCode}\``,
-      `• *Faulty Module:* \`${analysis.faultyModule}\``,
-      `• *Diagnosis Category:* ${analysis.crashCategory.replace(/_/g, " ").toUpperCase()}`,
+      `🤖 *ReUseChain PC Care AI (Telegram Backup Bot)*`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `💻 *Asset:* \`${targetTag}\``,
+      `🔍 *Issue Diagnosis:* *${aiDiag.interpretedIntent}*`,
+      `🧩 *Affected Component:* \`${aiDiag.affectedComponent}\``,
       ``,
-      `💡 *Recommended Remediation:*`,
-      ...analysis.suggestedSolution.map((s) => `  - ${s}`),
+      `📊 *Diagnostic Assessment:*`,
+      `• *Health:* ${aiDiag.threeFactors.factor1_health}`,
+      `• *Impact:* ${aiDiag.threeFactors.factor2_impact}`,
+      `• *Root Cause:* ${aiDiag.threeFactors.factor3_rootCause}`,
       ``,
-      `🤖 *Multi-Agent Handoff:*`,
-      `• *Active Agent:* ${analysis.recommendedAgent === "hardware_execution_agent" ? "⚡ Hardware Execution Agent" : "🛠️ Software Recovery Agent"}`,
-      `• *Status:* ${analysis.agentHandoffReason}`,
-      executionResult?.bookingId ? `• *Work Order:* Dispatched to ${executionResult.technician} (#${executionResult.bookingId.slice(0, 8)})` : "",
-      executionResult?.remediationCommands ? `• *Suggested Commands:*\n\`${executionResult.remediationCommands.join("\n")}\`` : "",
-    ].filter(Boolean).join("\n");
+      `⚠️ *Tool Notice:* _Terminal commands and hardware sandbox probes execute on local PC console only. Because this session is remote on Telegram, live command execution is restricted. Remote cognitive triage applied._`,
+      ``,
+      `💡 *Recommended Circular Next Steps:*`,
+      ``,
+      `🛠️ *1. REPAIR (Doorstep Technician via ONDC)*`,
+      `Book certified specialist Alex Rivera to service or replace hardware on-site.`,
+      executionResult?.bookingId ? `✓ *Work Order Dispatched:* #${executionResult.bookingId.slice(0, 8)} (${executionResult.technician})` : `• Schedule slot: Tomorrow, 10:30 AM Express Slot`,
+      ``,
+      `🔁 *2. REUSE & PARTS RESALE VALUATION*`,
+      `If decommissioning this PC, working components can be sold or repurposed:`,
+      `• *24GB DDR4 RAM:* Estimated Resale Value: *$45 - $55*`,
+      `• *Samsung 512GB NVMe SSD:* Estimated Resale Value: *$38 - $48*`,
+      `• *15.6" FHD IPS Display:* Estimated Resale Value: *$65 - $80*`,
+      `💰 *Total Estimated Working Parts Resale Value:* *$185 - $235*`,
+      ``,
+      `🛠️ *How to make use of other components:*`,
+      `• *NVMe SSD:* Slot into a $12 USB-C M.2 enclosure for a 1,000 MB/s external portable backup drive.`,
+      `• *Display Panel:* Pair with an inexpensive $15 eDP-to-HDMI driver board to build a secondary portable monitor.`,
+      `• *Motherboard/CPU:* Flash TrueNAS / OpenMediaVault to run a low-power 24/7 Home Server or NAS node.`,
+      ``,
+      `♻️ *3. RECYCLE (Certified Zero-Landfill)*`,
+      `If device is non-repairable, schedule R2v3 zero-landfill e-waste pickup with guaranteed scrap credits (+$18.50).`,
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    ].join("\n");
+
+    // Deliver directly to user's Telegram chat if chatId provided
+    if (chatId) {
+      await sendTelegramMessage(TELEGRAM_BACKUP_BOT_TOKEN, chatId, telegramReply);
+    }
 
     return NextResponse.json({
       success: true,
+      aiDiagnosis: aiDiag,
       analysis,
       executionResult,
       telegramReply,

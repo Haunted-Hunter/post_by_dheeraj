@@ -7,7 +7,8 @@ import {
   Laptop, 
   Cpu, 
   MessageSquare,
-  Network
+  Network,
+  Gamepad2
 } from "lucide-react";
 
 export default function Navbar() {
@@ -62,7 +63,7 @@ export default function Navbar() {
         </span>
       </Link>
 
-      {/* Navigation panel: ONLY visible when manual data entry is active */}
+      {/* Navigation panel: Shows the 3 main core features */}
       {manualMode ? (
         <nav className="nav-links flex items-center gap-1 animate-in fade-in duration-200">
           {primaryNavItems.map((item) => {
@@ -91,18 +92,18 @@ export default function Navbar() {
             className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all ml-1"
           >
             <MessageSquare size={13} />
-            <span>Chat Agent</span>
+            <span>AI chat agent</span>
           </Link>
         </nav>
       ) : (
-        /* When NOT in manual data entry: Navigation panel is hidden, replaced with clean single button */
+        /* When in Chat Agent view: Clean navigation to Manual Data Entry & AI quick check up (zero graph or extra tools) */
         <div className="flex items-center gap-2 animate-in fade-in duration-200">
           <Link
-            href="/graph"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-cyan-300 hover:text-white bg-cyan-950/40 border border-cyan-500/30 hover:border-cyan-400 transition-all shadow-sm"
+            href="/desktop-agent"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all shadow-sm"
           >
-            <Network size={14} className="text-cyan-400" />
-            <span>Architecture Graph</span>
+            <Cpu size={14} className="text-cyan-400" />
+            <span>AI quick check up</span>
           </Link>
           <Link
             href="/manual"
