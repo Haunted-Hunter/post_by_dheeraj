@@ -1,0 +1,76 @@
+Improve the frontend of this application so it feels premium, purposeful, and memorable. Use the existing technology stack when practical; if the project already uses Next.js, follow its App Router conventions.
+
+Build the actual application experience first. Do not create a generic landing page, a template-like dashboard, or a marketing page unless the product genuinely needs one. Understand the application's audience, core workflow, content, and existing design system before changing the interface.
+
+## Core stack and conventions
+
+- Use TypeScript and the project's existing framework and build tools.
+- Use Tailwind CSS where it is already established.
+- Follow shadcn/ui patterns for reusable primitives and composition.
+- Use Lucide icons instead of manually drawn SVG icons when an appropriate icon exists.
+- Preserve existing routes, APIs, data flows, and public component contracts unless the design requires a focused change.
+- Keep server and client components separated correctly.
+- Prefer small, reusable components over duplicated page-specific markup.
+
+## Visual direction
+
+- Choose a distinctive visual language that fits the application's subject and audience.
+- Define a coherent palette with clear primary, secondary, surface, text, border, and accent tokens.
+- Use expressive typography: pair a purposeful display face with a highly readable interface face. Load fonts intentionally rather than relying on default system stacks.
+- Create hierarchy through scale, spacing, contrast, texture, and composition instead of adding more cards.
+- Avoid generic SaaS layouts, excessive rectangular containers, purple-on-white defaults, and repetitive centered sections.
+- Use asymmetric composition, organic shapes, restrained shadows, layered depth, curved section edges, or subtle patterns when they support the content.
+- Keep cards for genuinely grouped or interactive content. Do not put cards inside cards or turn every section into a floating panel.
+- Make the first viewport immediately communicate what the application is and what the user can do.
+
+## Page and interaction structure
+
+1. Primary experience
+   - Design a strong first section around the application's most important action, content, or visual subject.
+   - Use a distinctive focal element such as oversized typography, an illustration, a data visualization, a product preview, or a meaningful interactive scene when appropriate.
+   - If the focal element uses layered 3D typography, give it real depth through text layers, shadows, outlines, perspective, rings, or a subtle grid. Replace placeholder copy with the application's actual name or concept.
+   - Make the focal element respond to scrolling with restrained rotation, scale, position, or spring-like movement when that improves the experience.
+   - Clamp motion so important content remains visible and usable at every viewport size.
+
+2. Supporting content
+   - Organize the application's key features, workflow, information, or states in a way that supports scanning and completion of tasks.
+   - Use staggered entrances, clear grouping, and meaningful transitions rather than decorative motion everywhere.
+   - Include loading, empty, error, hover, focus, active, and disabled states where the interface needs them.
+
+3. Closing area
+   - End with a purposeful next action, summary, navigation group, or contextual call to action.
+   - A large watermark, quote, circular control, or other editorial device may be used only when it reinforces the application's identity and remains accessible.
+
+4. Footer or navigation area
+   - Make navigation, status, help, legal, and secondary destinations easy to find.
+   - Style the footer or utility area to match the chosen visual language rather than copying an unrelated editorial pattern.
+
+## Motion and responsiveness
+
+- Add scroll-triggered reveal animations and staggered entrances only where they improve orientation.
+- Use subtle shimmer, ticker, hover popover, floating halo, quote, or button movement effects only when they have a clear purpose.
+- For live scroll-driven animation, use a client component with scroll events and requestAnimationFrame. Avoid depending only on CSS animation-timeline support.
+- Respect prefers-reduced-motion by disabling or simplifying nonessential animation.
+- Keep animation performant: avoid unnecessary layout reads, clean up listeners and animation frames, and do not animate large areas continuously without cause.
+- Support desktop, tablet, and mobile layouts with intentional breakpoint behavior.
+- Prevent horizontal overflow at all viewport widths. Ensure long labels, buttons, cards, tables, and headings wrap or adapt cleanly.
+- Use stable dimensions for boards, grids, media, controls, and other fixed-format elements so content changes do not shift the layout.
+
+## Accessibility and implementation quality
+
+- Use semantic HTML, visible focus states, keyboard-accessible interactions, and descriptive accessible labels.
+- Maintain sufficient color contrast and never communicate important information through color alone.
+- Use buttons for actions, links for navigation, and familiar icons with tooltips when an icon's meaning is not obvious.
+- Handle responsive navigation and touch targets carefully.
+- Keep content authentic to the application. Do not invent testimonials, metrics, features, or claims.
+- Avoid unnecessary dependencies and unrelated refactors.
+
+## Verification checklist
+
+- Inspect the existing project before editing and identify the component or route that owns each behavior.
+- Run the project's actual build, typecheck, and lint commands when available.
+- Test the primary workflow and interactive states.
+- Check desktop and mobile viewport behavior, including narrow screens and reduced-motion settings.
+- Confirm that images, icons, fonts, and data states render correctly.
+- Fix type errors, accessibility issues, layout overflow, and runtime regressions before finishing.
+- Make the result feel intentional, polished, and specific to the application rather than interchangeable with another template.
