@@ -177,7 +177,7 @@ export default function ManualDataEntryPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
+    <div className="workflow-page manual-workbench max-w-5xl mx-auto px-4 py-6 space-y-6">
       
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">

@@ -76,7 +76,7 @@ export default function Navbar() {
                 className={`nav-link ${isActive ? "active" : ""}`}
               >
                 <Icon size={15} />
-                <span>{item.label}</span>
+                <span className="nav-label">{item.label}</span>
               </Link>
             );
           })}
@@ -92,7 +92,7 @@ export default function Navbar() {
             className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all ml-1"
           >
             <MessageSquare size={13} />
-            <span>AI chat agent</span>
+            <span className="nav-label">AI chat agent</span>
           </Link>
         </nav>
       ) : (
@@ -103,7 +103,7 @@ export default function Navbar() {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all shadow-sm"
           >
             <Cpu size={14} className="text-cyan-400" />
-            <span>AI quick check up</span>
+            <span className="nav-label">AI quick check up</span>
           </Link>
           <Link
             href="/manual"
@@ -115,7 +115,7 @@ export default function Navbar() {
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-slate-900 border border-slate-800 hover:border-cyan-500/40 transition-all shadow-sm"
           >
             <Laptop size={14} className="text-cyan-400" />
-            <span>Manual Data Entry</span>
+            <span className="nav-label">Manual Data Entry</span>
           </Link>
         </div>
       )}

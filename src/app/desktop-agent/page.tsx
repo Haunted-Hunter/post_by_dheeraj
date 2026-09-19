@@ -289,7 +289,7 @@ export default function SimpleDesktopAgentPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 pb-12">
+    <div className="workflow-page telemetry-workbench max-w-5xl mx-auto space-y-6 pb-12">
       {/* Toast Alert */}
       {toastMessage && (
         <div className="p-3.5 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-200 text-xs flex items-center justify-between shadow-lg shadow-cyan-950/50 animate-in fade-in">

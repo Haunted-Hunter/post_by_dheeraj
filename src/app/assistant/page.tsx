@@ -866,7 +866,7 @@ export default function DiagnosticAssistantPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] max-w-6xl mx-auto px-4 py-4 sm:py-6">
+    <div className="workflow-page assistant-workbench flex flex-col h-[calc(100vh-4rem)] max-w-6xl mx-auto px-4 py-4 sm:py-6">
       
       {/* Top Header Card */}
       <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-4 backdrop-blur-md shadow-xl flex flex-wrap items-center justify-between gap-4">
